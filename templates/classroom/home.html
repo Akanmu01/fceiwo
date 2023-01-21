@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% block title %} FEDERAL COLLEGE OF EDUCATION IWO – IWO, OSUN STATE {% endblock title %}
+{% block content %}
+  <section id="hero" class="d-flex justify-content-center align-items-center">
+      <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+        <h1>FEDERAL COLLEGE OF EDUCATION IWO</h1>
+        <h2>INTEGRITY, WISDOM AND OPTIMISM</h2>
+        <a href="{% url 'signup' %}" class="btn-get-started">Get Started</a>
+      </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+        <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+          <img src="/static/img/about.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+          <h3>Welcome To Federal College Of Education Iwo, Osun State Official Website.</h3>
+          <p>
+           The Beginning of the Journey Lack of adequate qualified teachers in public and private schools has been identified as a major challenge in the provision of Universal Basic Education (UBE) in Nigeria. As part of the measures to improve the number and quality of teachers to be produced and deployed to primary and secondary schools across the country, the Federal Government of Nigeria under the able leadership of President Muhammadu Buhari, established six (6) Federal Colleges of Education each in the six geo-political zones of the country on 18th November 2019. The South-west zone of the colleges is sited in Iwo, Osun State. Soon after the establishment of the Colleges, Principal officers were appointed on 16th March 2021, while operation commenced in April 2021.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+  <section id="why-us" class="why-us">
+    <div class="container" data-aos="fade-up">
+      <div class="text-center">
+        <div class="col-lg-6 mx-auto">
+          <h2 class="lead mb-4">The Paramount Ruler Of Iwoland, Presented The C Of O To The Management Team Of The Newly Established Federal Colege Of Education Iwo.</h2>
+          
+        </div>
+        <div class="overflow-hidden" style="max-height: 30vh;">
+          <div class="container px-5">
+            <img src="/static/img/side.jpg" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">    
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="popular-courses" class="courses">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Courses</h2>
+        <p>Popular Courses</p>
+      </div>
+
+      <div class="row" data-aos="zoom-in" data-aos-delay="100">
+      {% for post in posts %}
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="course-item">
+            <img src="{{post.cover_image.url}}" class="img-fluid" alt="{{post.title}}">
+            <div class="course-content"> 
+              <h3><a href="course-details.html">{{post.title}}</a></h3>
+              <p>{{post.body|truncatechars:100|safe}}</p>
+              <div class="trainer d-flex justify-content-between align-items-center">
+                <div class="trainer-profile d-flex align-items-center">
+                  <img src="{{post.cover_image.url}}" class="img-fluid" alt="">
+                  <span>{{post.author.username}}</span>
+                </div>
+                <div class="trainer-rank d-flex align-items-center">
+                  {{post.postview}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      {% endfor %}
+      </div>
+
+    </div>
+  </section>
+
+
+  <section id="trainers" class="trainers">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="member" style="background: #257526 !important;background-size: cover !important;}">
+            <div class="member-content">
+            <h4 class="mt-3 content_head">INDUSTRIAL RELATIONS</h4>
+              <p class="contents">
+                Our College has enjoyed an exceptional unbreakable chain of harmonious industrial relations between the Management and the staff and students Unions. This is partly because our Governments have been considerate and responsive to the welfare of staff and students and partly because the College was lucky to have been blessed with Managements and Union Leaders that always put common interests above personal interests and worked hard for the development of the College.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="member" style="background: #4778bc !important;background-size: cover !important;}">
+            <div class="member-content">
+              <h4 class="mt-3 content_head">COMMUNITY RELATIONS</h4>
+              <p class="contents">
+                Iwo people and its leaders, particularly, the Traditional Leaders of Iwo, have been very hospitable and supportive to College since its establishment. The pioneer leaderships of the College have done an excellent work of establishing and sustaining a mutually beneficial relation with our host community. Therefore, we made sure we build upon that through; the recruitment of more junior staff and security personnel on casual basis from Iwo and neighbouring towns.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="member" style="background: #51ad76 !important;background-size: cover !important;}">
+            <div class="member-content">
+              <h4 class="mt-3 content_head">COLLABORATION/AFFILIATION</h4>
+              <p class="contents">
+                The College had and is still into collaborations/affiliations with so many National and International Organizations and Universities like UNICEF, DFID, National Information Technology Development Agency (NITDA), Nigerian Communications Commission (NCC), Central Bank of Nigeria (CBN), Federal and State Universities in Osun State, Other Tertiary Institutions, National Teachers Institute (NTI) Universal Basic Education (UBEC), State Universal Basic Education Board (SUBEB) etc.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <section id="testimonials" class="testimonials">
+    <div class="container aos-init aos-animate px-4 pt-5 my-5" data-aos="fade-up">
+      <div class="section-title">
+        <h2>Partners</h2>
+        <p>Partners</p>
+      </div>
+      <div class="testimonials-slider swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper-wrapper" id="swiper-wrapper-31188575331b1107d" aria-live="off" style="transform: translate3d(-4308px, 0px, 0px); transition-duration: 0ms;">
+          <div class="swiper-slide swiper-slide-duplicate swiper-slide-next swiper-slide-duplicate-prev" role="group" aria-label="5 / 5" data-swiper-slide-index="4" style="width: 698pc; margin-right: 20px;">
+      </div>
+
+          <div class="swiper-carousel swiper-slide swiper-slide-duplicate-active" role="group" aria-label="1 / 5" data-swiper-slide-index="0" style="width: 906px; margin-right: 20px;">
+            <img src="/static/img/ncce.jpg" class="img-fluid border rounded-3" loading="lazy">    
+          </div>
+          <div class="swiper-carousel swiper-slide" role="group" aria-label="2 / 5" data-swiper-slide-index="1" style="width: 906px; margin-right: 20px;">
+            <img src="/static/img/fme.jpeg" class="img-fluid border rounded-3">
+          </div>
+
+          <div class="swiper-carousel swiper-slide" role="group" aria-label="3 / 5" data-swiper-slide-index="2" style="width: 100%; margin-right: 20px;">
+            <img src="/static/img/NCC.jpg" class="img-fluid border rounded-3">    
+          </div>
+
+          <div class="swiper-carousel swiper-slide" role="group" aria-label="4 / 5" data-swiper-slide-index="3" style="width: 906px; margin-right: 20px;">
+            <img src="/static/img/tetfund.jpeg" class="img-fluid border rounded-3">
+          </div>
+
+          <div class="swiper-carousel swiper-slide swiper-slide-prev swiper-slide-duplicate-next" role="group" aria-label="5 / 5" data-swiper-slide-index="4" style="width: 906px; margin-right: 20px;">
+            <img src="/static/img/ubec.jpeg" class="img-fluid border rounded-3">    
+          </div>
+          
+        <div class="swiper-carousel swiper-slide swiper-slide-duplicate swiper-slide-active" role="group" aria-label="1 / 5" data-swiper-slide-index="0" style="width: 906px; margin-right: 20px;">
+          <img src="/static/img/nitda.jpg" class="img-fluid border rounded-3">    
+        </div>
+
+      <!--         <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true">
+                </span>
+                <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2">
+                </span>
+                <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3">
+                </span>
+                <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4">
+                </span>
+                <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5">
+                </span>
+              </div> -->
+        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+
+
+<div class=" text-center px-4 py-3 my-5">
+    <h1 class="display-5 fw-bold text-dark">College Management System</h1>
+    <div class="col-lg-6 mx-auto container">
+		<p class="lead mb-4 text-dark">Test your skills and become a master.</p>
+	  	<p class="lead text-dark">We organize quizzes on various topics.</p>
+		<p class="lead text-dark">Sign up if you haven't already and get access to millions of quizzes on the topic of your interest.</p>
+    </div>
+  </div>
+
+
+
+
+
+  
+<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+	<div class="mb-4">
+	<a href="{% url 'student_signup' %}" class="btn btn-primary" role="button">Sign up as Student</a>
+	<a href="{% url 'teacher_signup' %}" class="btn btn-primary" role="button">Sign up as Teacher</a>
+	<a href="{% url 'adminpage_signup' %}" class="btn btn-primary" role="button">Sign up as Admin</a>
+	</div>
+</div>

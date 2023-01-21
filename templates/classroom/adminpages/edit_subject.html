@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} ADMIN | FEDERAL COLLEGE OF EDUCATION IWO – IWO, OSUN STATE {% endblock title %}
+{% block content %}
+{% load crispy_forms_tags %}
+    <div class="container headerdiv">
+        <div class="columns">
+            <div class="column is-12" style="margin-top: 100px">
+                <div style="margin-left: 20%; margin-right: 20%">
+                <h1 class="title text-center">Edit Subject</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="field">
+                            <div class="control">
+                                <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

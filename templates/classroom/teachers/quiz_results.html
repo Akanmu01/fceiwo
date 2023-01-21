@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}TEACHER | FEDERAL COLLEGE OF EDUCATION IWO – IWO, OSUN STATE {% endblock title %}
+{% load crispy_forms_tags humanize %}
+
+{% block content %}
+<div class="container headerdiv">
+
+  <h2 class="mb-3">{{ quiz.name }} Results</h2>
+  
+  <div class="card" id="printJS-form">
+    <div class="card-header">
+      <strong>Taken Quizzes</strong>
+      <span class="badge badge-pill badge-primary float-right text-dark text-right">Average Score: {{ quiz_score.average_score|default_if_none:0.0 }}</span>
+    </div>
+    <table class="table mb-0" >
+      <thead>
+        <tr>
+          <th>Student Username</th>
+          <th>Time Submitted</th>
+          <th>Quiz Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for taken_quiz in taken_quizzes %}
+          <tr>
+            <td>{{ taken_quiz.student.user.username }}</td>
+            <td>{{ taken_quiz.date | time}}</td> <!--| naturaltime   -->
+            <td>{{ taken_quiz.score }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="card-footer text-muted">
+      Total respondents: <strong>{{ total_taken_quizzes }}</strong>
+    </div>
+  </div>
+  <button class="btn btn-primary mt-3"  onclick="tableToCSV()">PRINT RESULT</button>
+</div>
+
+  <script type="text/javascript">
+    function tableToCSV() {
+
+      // Variable to store the final csv data
+      var csv_data = [];
+
+      // Get each row data
+      var rows = document.getElementsByTagName('tr');
+      for (var i = 0; i < rows.length; i++) {
+
+        // Get each column data
+        var cols = rows[i].querySelectorAll('td,th');
+
+        // Stores each csv row data
+        var csvrow = [];
+        for (var j = 0; j < cols.length; j++) {
+
+          // Get the text data of each cell
+          // of a row and push it to csvrow
+          csvrow.push(cols[j].innerHTML);
+        }
+
+        // Combine each column value with comma
+        csv_data.push(csvrow.join(","));
+      }
+
+      // Combine each row data with new line character
+      csv_data = csv_data.join('\n');
+
+      // Call this function to download csv file
+      downloadCSVFile(csv_data);
+
+    }
+
+    function downloadCSVFile(csv_data) {
+
+      // Create CSV file object and feed
+      // our csv_data into it
+      CSVFile = new Blob([csv_data], {
+        type: "text/csv"
+      });
+
+      // Create to temporary link to initiate
+      // download process
+      var temp_link = document.createElement('a');
+
+      // Download csv file
+      temp_link.download = "result.csv";
+      var url = window.URL.createObjectURL(CSVFile);
+      temp_link.href = url;
+
+      // This link should not be displayed
+      temp_link.style.display = "none";
+      document.body.appendChild(temp_link);
+
+      // Automatically click the link to
+      // trigger download
+      temp_link.click();
+      document.body.removeChild(temp_link);
+    }
+  </script>
+
+{% endblock %}

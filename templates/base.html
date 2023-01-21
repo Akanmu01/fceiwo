@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">    
+  <title>{% block title %}{% endblock title%}</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/static/img/logo.jpg">
+  <link href="/static/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+  <div id="app" hx-swap="innerHTML swap:0.1s" hx-boost="true">
+    {% if user.is_teacher %}
+      <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+          <h1 class="logo me-auto"><a href="{% url 'home' %}">FCEIWO</a></h1>
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="active" href="{% url 'home' %}">Home</a></li>
+              <li><a class="text-dark nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'teachers:quiz_add' %}" delay="0.1">Add Quiz</a></li>
+              <li class="dropdown"><a href="#"><span>{{user.username | upper }}</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                  <li><a class="dropdown-item{% if active ==  'profile' %} active{% endif %}" href="/user/{{ user.username }}">Profile</a></li>
+                  <!-- <li><a href="#">Admission</a></li> -->
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+        </div>
+      </header>
+    {% elif user.is_student %}
+      <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+          <h1 class="logo me-auto"><a href="{% url 'home' %}">FCEIWO</a></h1>
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="active{% if active == 'new' %} active{% endif %}" href="{% url 'students:quiz_list' %}" hx-push-url="true">Home</a></li>
+
+              <li><a  class="text-dark nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'students:admissionform'%}" delay="0.01">Apply for Admission</a></li>
+
+              <li><a  class="text-dark nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'students:taken_quiz_list' %}" delay="0.1">Exam</a></li>
+
+              <li class="dropdown"><a href="#"><span>{{user.username | upper }}</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                  <li><a class="dropdown-item{% if active ==  'profile' %} active{% endif %}" href="/user/{{ user.username }}">Profile</a></li>
+                  <!-- <li><a href="#">Admission</a></li> -->
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+        </div>
+      </header>
+    {% elif user.is_admin %}
+      <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+          <h1 class="logo me-auto"><a href="{% url 'home' %}">FCEIWO</a></h1>
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="active" href="{% url 'home' %}">Home</a></li>
+
+              <li><a class="text-dark nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'adminpages:allsubject' %}" delay="0.1">All Subject</a></li>
+
+              <li><a class="text-dark nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'adminpages:addsubject' %}" delay="0.1">Add Subject</a></li>
+
+              <li class="dropdown"><a href="#"><span>{{user.username | upper }}</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                  <li><a class="dropdown-item{% if active ==  'profile' %} active{% endif %}" href="/user/{{ user.username }}">Profile</a></li>
+                  <!-- <li><a href="#">Admission</a></li> -->
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+        </div>
+      </header>
+    {% elif user.is_superuser %}
+      <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+          <h1 class="logo me-auto"><a href="{% url 'home' %}">FCEIWO</a></h1>
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="active" href="{% url 'home' %}">Home</a></li>
+
+              <li><a class="text-dark nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'adminpages:allsubject' %}" delay="0.1">All Subject</a></li>
+
+              <li><a class="text-dark nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'adminpages:addsubject' %}" delay="0.1">Add Subject</a></li>
+
+              <li class="dropdown"><a href="#"><span>{{user.username | upper }}</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                  <li><a class="dropdown-item{% if active ==  'profile' %} active{% endif %}" href="/user/{{ user.username }}">Profile</a></li>
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+        </div>
+      </header>
+    {% else %}
+      <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+          <h1 class="logo me-auto"><a href="{% url 'home' %}">FCEIWO</a></h1>
+
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="active" href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="#">Courses</a></li>
+              <li class="dropdown"><a href="#"><span>Application</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                  <li><a href="#">Admission</a></li>
+                  <li><a href="#">Staff Application</a></li>
+                </ul>
+              </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+
+          <a href="{% url 'signup' %}" class="get-started-btn">Get Started</a>
+        </div>
+      </header>
+    {% endif %}
+  <main id="main">
+      {% block content %}{% endblock %}
+  </main>
+  </div>
+
+
+
+  <div class="container-fluid shadow-lg">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-muted">About</a></li>
+        <!-- <li class="nav-item"><a href="{% url 'login' %}" class="nav-link px-2 text-muted">Login</a></li> -->
+      </ul>
+      <p class="text-center text-muted">© 2023 <a href="https://petrjoe.netlify.app" style="color: blue;">PetrJoe</a> , Inc</p>
+    </footer>
+  </div>
+  <script src="/static/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/static/vendor/aos/aos.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script>
+    document.body.addEventListener('htmx:configRequest', (event) => {
+      event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    })
+  </script>
+  {% if user.is_student %}
+  <script type="text/javascript" src="{% static 'js/htmx.min.js' %}"></script>
+  {%else%}
+  {% endif %}
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

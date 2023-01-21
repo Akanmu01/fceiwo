@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} ADMIN | FEDERAL COLLEGE OF EDUCATION IWO – IWO, OSUN STATE {% endblock title %}
+{% block content %}
+<!--   <nav aria-label="container breadcrumb headerdiv">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'adminpages:adminpages_home' %}">My Quizzes</a></li>
+      <li class="breadcrumb-item active" aria-current="page">All subject</li>
+    </ol>
+  </nav> -->
+<div class="headerdiv container">
+  <h2 class="mb-3">All subject</h2>
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-12">
+		<div>
+			{% for subject in subjects %}				
+				<a href="{% url 'adminpages:edit_subject' subject.pk %}" class="btn btn-primary">{{ subject.name }} | status({{ subject.status }})</a>
+			{% endfor %}
+		</div> 
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

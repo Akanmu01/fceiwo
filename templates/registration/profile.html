@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container" style="margin-top: 10%;">
+  {% include 'classroom/students/_header.html' with active='taken' %}
+  <div class="profile-container text-white">
+    <div class="profile-text text-dark">
+      <h1 class=" text-center mt-3">{{ user.username }}</h1>
+
+      <p class=" text-dark">
+        <h5>{{ user.first_name }}</h5>
+        <h5>{{ user.last_name }}</h5>
+        <h5>{{ user.email }}</h5>
+      </p>
+
+      <h5 class=" text-dark">
+        {% if user.profile.conference %}
+          {{ user.profile.conference }}
+        {% endif %}
+      </h5>
+
+      <h5 class=" text-dark">
+        {% if user.profile.number %}
+          {{ user.profile.number }}
+        {% endif %}
+      </h5>
+
+      <h5 class=" text-dark">
+        {{ user.email }}
+      </h5>
+
+    </div>
+
+    <div class="profile-cta">
+      <a class="message-btn " href="{% url 'students:editprofile' %}">Edit Profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

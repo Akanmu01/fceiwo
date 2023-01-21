@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} ADMIN | FEDERAL COLLEGE OF EDUCATION IWO – IWO, OSUN STATE {% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container headerdiv">
+  <h2 class="mb-3">Add a new subject</h2>
+    {% for subject in subject %}
+
+      {% include "allsubject.html" %}
+
+    {% endfor %}
+
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-12">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy  }}
+        <button type="submit" class="btn btn-success mt-2">Save</button>
+        <a href="{% url 'adminpages:adminpages_home' %}" class="mt-2 btn btn-outline-secondary" role="button">Nevermind</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+     
+       
